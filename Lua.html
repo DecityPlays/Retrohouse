@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetroHouse - Roblox Game</title>
+    <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=FF+Nort+Black&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+        body {
+            font-family: 'FF Nort Black', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #e0e0e0;
+            background: #121212;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            animation: fadeIn 1s ease-out;
+        }
+
+        header {
+            font-family: 'Press Start 2P', cursive;
+            background: #1e1e1e;
+            color: #ff0081;
+            padding: 1em 2em;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+        }
+
+        .logo img {
+            height: 50px; /* Adjust size as needed */
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 2em;
+            color: #ff0081;
+            text-shadow: 0 0 5px #ff0081;
+        }
+
+        .explore-button {
+            display: block;
+            margin-top: 0.5em;
+            padding: 0.5em 1em;
+            background: #ff0081;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .explore-button:hover {
+            background: #e6006d;
+            transform: scale(1.05);
+        }
+
+        header nav {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            margin-top: 1em;
+        }
+
+        header nav a {
+            color: #ff0081;
+            text-decoration: none;
+            font-size: 1em;
+            padding: 0.5em;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s, transform 0.3s;
+        }
+
+        header nav a:hover {
+            background: #ff0081;
+            color: #fff;
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #1e1e1e;
+            border-radius: 5px;
+            padding: 0.5em;
+            transition: background 0.3s;
+            margin-top: 1em;
+        }
+
+        .search-bar input {
+            border: none;
+            padding: 0.5em;
+            border-radius: 5px;
+            font-size: 1em;
+            color: #e0e0e0;
+            background: #333;
+            width: 200px;
+            transition: background 0.3s, width 0.3s;
+        }
+
+        .search-bar input:focus {
+            background: #444;
+            width: 250px;
+        }
+
+        .search-bar button {
+            border: none;
+            background: #ff0081;
+            color: #fff;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-left: 0.5em;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .search-bar button:hover {
+            background: #e6006d;
+            transform: scale(1.05);
+        }
+
+        .container {
+            display: flex;
+            margin: 1em auto;
+            max-width: 1200px;
+            animation: slideIn 1s ease-out;
+        }
+
+        .sidebar {
+            width: 20%;
+            background: #1e1e1e;
+            padding: 1em;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .sidebar:hover {
+            transform: translateX(-5px);
+            animation: sidebarPulse 1s infinite alternate;
+        }
+
+        .sidebar h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5em;
+            color: #ff0081;
+            margin-top: 0;
+            border-bottom: 2px solid #ff0081;
+            padding-bottom: 0.5em;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 0.5em;
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1em;
+            margin: 0.5em 0;
+            transition: background 0.3s, color 0.3s, transform 0.3s;
+            border-radius: 5px;
+        }
+
+        .sidebar a:hover {
+            background: #ff0081;
+            color: #fff;
+            transform: scale(1.1) rotate(3deg);
+        }
+
+        .content {
+            width: 80%;
+            padding: 1em;
+        }
+
+        .section {
+            background: #1e1e1e;
+            color: #e0e0e0;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            position: relative;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .section:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+            animation: pulse 1s infinite;
+        }
+
+        .section h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5em;
+            color: #ff0081;
+            margin-top: 0;
+            border-bottom: 2px solid #ff0081;
+            padding-bottom: 0.5em;
+            text-shadow: 0 0 5px #ff0081;
+        }
+
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .section li {
+            padding: 0.5em 0;
+            border-bottom: 1px solid #333;
+            transition: background 0.3s;
+        }
+
+        .section li:last-of-type {
+            border-bottom: none;
+        }
+
+        .section li:hover {
+            background: #333;
+            animation: highlight 1s infinite alternate;
+        }
+
+        .icon-box {
+            background: #1e1e1e;
+            color: #e0e0e0;
+            border: 1px solid #333;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .icon-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+            animation: bounce 1s infinite;
+        }
+
+        .icon-box i {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+            animation: spin 2s linear infinite;
+        }
+
+        .icon-box h3 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        .icon-box p {
+            margin: 0.5em 0 0;
+        }
+
+        .icon-box a {
+            color: #ff0081;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .icon-box a:hover {
+            text-decoration: underline;
+        }
+
+        .maps, .gamemodes, .cosmetics, .roles, .modifiers {
+            background: #1e1e1e;
+            color: #e0e0e0;
+            border: 1px solid #333;
+            border-radius: 8px;
+            margin-bottom: 1em;
+            padding: 1em;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        footer {
+            background: #1e1e1e;
+            color: #e0e0e0;
+            padding: 1em 2em;
+            text-align: center;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.7);
+            border-top: 1px solid #333;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #ff0081;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes headerGlow {
+            from { text-shadow: 0 0 5px #ff0081; }
+            to { text-shadow: 0 0 20px #ff0081; }
+        }
+
+        @keyframes sidebarPulse {
+            from { box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); }
+            to { box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes highlight {
+            0% { background: #333; }
+            100% { background: #444; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://www.example.com/logo.png" alt="RetroHouse Logo">
+            <h1>RetroHouse</h1>
+        </div>
+        <a href="https://roblox.com/home" class="explore-button">EXPLORE</a>
+        <nav>
+            <a href="#maps">Maps</a>
+            <a href="#gamemodes">Gamemodes</a>
+            <a href="#cosmetics">Cosmetics</a>
+            <a href="#roles">Roles</a>
+            <a href="#modifiers">Modifiers</a>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <button type="button">Search</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="sidebar">
+            <h2>Sections</h2>
+            <a href="#maps">Maps</a>
+            <a href="#gamemodes">Gamemodes</a>
+            <a href="#cosmetics">Cosmetics</a>
+            <a href="#roles">Roles</a>
+            <a href="#modifiers">Modifiers</a>
+        </div>
+        <div class="content">
+            <div id="maps" class="maps section">
+                <h2>Maps</h2>
+                <!-- Content for Maps -->
+            </div>
+            <div id="gamemodes" class="gamemodes section">
+                <h2>Gamemodes</h2>
+                <!-- Content for Gamemodes -->
+            </div>
+            <div id="cosmetics" class="cosmetics section">
+                <h2>Cosmetics</h2>
+                <!-- Content for Cosmetics -->
+            </div>
+            <div id="roles" class="roles section">
+                <h2>Roles</h2>
+                <!-- Content for Roles -->
+            </div>
+            <div id="modifiers" class="modifiers section">
+                <h2>Modifiers</h2>
+                <!-- Content for Modifiers -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 RetroHouse. All rights reserved.</p>
+        <p><a href="https://www.youtube.com/channel/UCXXXXXX">YouTube Channel</a> | <a href="https://www.example.com">Website</a></p>
+    </footer>
+
+    
